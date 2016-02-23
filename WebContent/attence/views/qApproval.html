@@ -1,0 +1,497 @@
+
+<div class="container" style="width: 1000px">
+	<div class="row">
+		<div class="col-md-11">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-uppercase bg-danger">
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;需审批请假单</strong>
+				</div>
+				<div class="panel-body">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<div class="row">
+										<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;#</div>
+										<div class="col-md-2" style="color: #34495e">申请时间</div>
+										<div class="col-md-2" style="color: #34495e">开始时间</div>
+										<div class="col-md-2" style="color: #34495e">结束时间</div>
+										<div class="col-md-2" style="color: #34495e">类型</div>
+									</div>
+								</h4>
+							</div>
+
+						</div>
+						<div ng-repeat="leave in leaves" ng-show="leave.state=='审批中'">
+
+							<!--  <a ng-href="#/view/{{recipe.id}}">{{recipe.title}}</a>-->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<div class="row">
+											<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;{{leave.userfile.name}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.time}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.startTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.endTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.type}}</div>
+
+											<small class="col-md-2" style="top: 4px"><a
+												data-toggle="collapse" data-parent="#accordion"
+												href="#{{leave.id}}" aria-expanded="true"
+												aria-controls="collapseThree">查看详情▼ </a> </small>
+										</div>
+									</h4>
+								</div>
+								<div id="{{leave.id}}" class="panel-collapse collapse"
+									role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<form class="form-horizontal"  ng-submit="save()" role="form">
+											<fieldset disabled>
+												<div class="form-group">
+													<label class="control-label col-md-offset-5"><h6>请假单</h6>
+													</label><br />
+
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">姓名</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="leave.userfile.name">
+														</div>
+														<label for="department" class="col-md-2 control-label">部门</label>
+														<div class="col-md-3">
+															<select class="form-control"
+																ng-model="leave.userfile.department">
+																<option>研发部</option>
+																<option>行政部</option>
+																<option>财政部</option>
+
+															</select>
+
+														</div>
+													</div>
+													<br />
+													<div class="row">
+														<label for="department" class="col-md-2 control-label">类型</label>
+														<div class="col-md-3">
+															<select class="form-control" ng-model="leave.type">
+																<option>年假</option>
+																<option>病假</option>
+																<option>事假</option>
+																<option>婚假</option>
+																<option>产假</option>
+															</select>
+
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">开始时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="leave.startTime">
+														</div>
+														<label for="department" class="col-md-2 control-label">结束时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="leave.endTime">
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="reason" class="col-md-2 control-label">事由</label>
+
+														<div class="col-md-8">
+															<textarea class="form-control" rows="5"
+																ng-model="leave.reason"></textarea>
+														</div>
+													</div>
+													<div class="row"></div>
+												</div>
+											</fieldset>
+											<hr>
+
+											<div class="form-group" ng-hide="leave.userfile.role=='部门经理'"
+												ng-hide="leave.userfile.role=='副总经理'"
+												ng-hide="leave.userfile.role=='总经理'">
+												<div class="row">
+													<label for="reason"
+														class="col-md-offset-3 col-md-4 control-label"><h6>部门经理审批意见</h6>
+
+													</label>
+
+												</div>
+												<div class="row">
+													<div class="col-md-8 col-md-offset-2">
+														<textarea class="form-control" rows="3"
+															ng-model="leave.leaveApprovals[0].comment"
+															ng-disabled="meuserfile.role!='部门经理'"></textarea>
+													</div>
+												</div>
+												<div class="row">
+													<br /> <label for="department"
+														class="col-md-2 control-label">审批</label>
+													<div class="col-md-3">
+														<select class="form-control"
+															ng-model="leave.leaveApprovals[0].agree"
+															ng-disabled="meuserfile.role!='部门经理'">
+															<option>审批中</option>
+															<option>拒绝</option>
+															<option>同意</option>
+
+														</select>
+
+													</div>
+													<label class="col-md-2 control-label">姓名：{{leave.leaveApprovals[0].userfile.name}}</label>
+													<label class=" col-md-2 control-label">时间：{{leave.leaveApprovals[0].time}}</label>
+												</div>
+											</div>
+											<div class="row form-actions" ng-hide="meuserfile.role!='部门经理'">
+												<button type="button"
+													class="btn btn-inverse button-glow col-md-offset-4 col-md-1"
+													ng-disabled="leave.leaveApprovals[0].agree=='审批中'" ng-click="save()">提交</button>
+												<button type="button"
+													class="btn btn-inverse button-glow col-md-offset-1 col-md-1"
+													ng-click="reset()">清空</button>
+
+											</div>
+											<hr>
+											<div class="form-group" ng-hide="leave.state=='已拒绝'"
+												ng-hide="leave.userfile.role=='副总经理'"
+												ng-hide="leave.userfile.role=='总经理'"
+												ng-disabled="meuserfile.role!='副总经理'">
+												<div class="row">
+													<label for="reason"
+														class="col-md-offset-3 col-md-4 control-label"><h6>副总经理审批意见</h6>
+													</label>
+												</div>
+												<div class="row">
+													<div class="col-md-8 col-md-offset-2">
+														<textarea class="form-control" rows="3"
+															ng-model="leave.leaveApprovals[1].comment"
+															ng-disabled="meuserfile.role!='副总经理'"></textarea>
+													</div>
+												</div>
+												<div class="row">
+													<br /> <label for="department"
+														class="col-md-2 control-label">审批</label>
+													<div class="col-md-3">
+														<select class="form-control"
+															ng-model="leave.leaveApprovals[1].agree"
+															ng-disabled="meuserfile.role!='副总经理'">
+															<option>审批中</option>
+															<option>拒绝</option>
+															<option>同意</option>
+
+														</select>
+
+													</div>
+													<label class="col-md-2 control-label">姓名：{{leave.leaveApprovals[1].userfile.name}}</label>
+													<label class="col-md-2  control-label">时间：{{leave.leaveApprovals[1].time}}</label>
+												</div>
+											</div>
+											<div class="row form-actions" ng-hide="meuserfile.role!='副总经理'">
+												<button type="button"
+													class="btn btn-inverse button-glow col-md-offset-4 col-md-1"
+													ng-disabled="leave.leaveApprovals[1].agree=='审批中'" ng-click="save()">提交</button>
+												<button type="button"
+													class="btn btn-inverse button-glow col-md-offset-1 col-md-1"
+													ng-click="reset()">清空</button>
+
+											</div>
+											<hr>
+
+											<div class="form-group" ng-hide="leave.state=='已拒绝'"
+												ng-hide="leave.time<24" ng-hide="leave.userfile.role=='总经理'"
+												ng-disabled="meuserfile.role!='总经理'">
+												<div class="row">
+													<label for="reason"
+														class="col-md-offset-3 col-md-4 control-label"><h6>总经理审批意见</h6>
+													</label>
+												</div>
+												<div class="row">
+													<div class="col-md-8 col-md-offset-2">
+														<textarea class="form-control" rows="3"
+															ng-model="leave.leaveApprovals[2].comment"
+															ng-disabled="meuserfile.role!='总经理'"></textarea>
+													</div>
+												</div>
+												<div class="row">
+													<br /> <label for="department"
+														class="col-md-2 control-label">审批</label>
+													<div class="col-md-3">
+														<select class="form-control"
+															ng-model="leave.leaveApprovals[2].agree"
+															ng-disabled="meuserfile.role!='总经理'">
+															<option>审批中</option>
+															<option>拒绝</option>
+															<option>同意</option>
+
+														</select>
+
+													</div>
+													<label class="col-md-2 control-label">姓名：{{leave.leaveApprovals[2].userfile.name}}</label>
+													<label class="col-md-2 control-label">时间：{{leave.leaveApprovals[2].time}}</label>
+												</div>
+											</div>
+											<div class="row form-actions" ng-hide="meuserfile.role!='总经理'">
+												<button type="button"
+													class="btn btn-inverse button-glow col-md-offset-4 col-md-1"
+													ng-disabled="leave.leaveApprovals[2].agree=='审批中'" ng-click="save()">提交</button>
+												<button type="button"
+													class="btn btn-inverse button-glow col-md-offset-1 col-md-1"
+													ng-click="reset()">清空</button>
+
+											</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-offset-3" style="height: 40px" ng-hide="true">
+							<div class="pagination">
+								<ul>
+									<li class="previous"><a href="#fakelink"
+										class="fui-arrow-left"></a></li>
+									<li class="active"><a href="#fakelink">1</a></li>
+									<li><a href="#fakelink">2</a></li>
+									<li><a href="#fakelink">3</a></li>
+									<li><a href="#fakelink">4</a></li>
+									<li><a href="#fakelink">5</a></li>
+									<li><a href="#fakelink">6</a></li>
+									<li><a href="#fakelink">7</a></li>
+									<li><a href="#fakelink">8</a></li>
+									<li class="next"><a href="#fakelink"
+										class="fui-arrow-right"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading text-uppercase bg-danger">
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;审批历史</strong>
+				</div>
+
+				<div class="panel-body">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<div class="row">
+										<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;#</div>
+										<div class="col-md-2" style="color: #34495e">申请时间</div>
+
+										<div class="col-md-2" style="color: #34495e">开始时间</div>
+										<div class="col-md-2" style="color: #34495e">结束时间</div>
+										<div class="col-md-2" style="color: #34495e">类型</div>
+									</div>
+								</h4>
+							</div>
+
+						</div>
+						<div ng-repeat="leave in leaves" ng-show="leave.state!='审批中'">
+
+							<!--  <a ng-href="#/view/{{recipe.id}}">{{recipe.title}}</a>-->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<div class="row">
+											<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;{{leave.userfile.name}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.time}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.startTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.endTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.type}}</div>
+
+											<small class="col-md-2" style="top: 4px"><a
+												data-toggle="collapse" data-parent="#accordion"
+												href="#Two{{leave.id}}" aria-expanded="true"
+												aria-controls="collapseThree">查看详情▼ </a> </small>
+										</div>
+									</h4>
+								</div>
+								<div id="Two{{leave.id}}" class="panel-collapse collapse"
+									role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<form class="form-horizontal" role="form">
+											<fieldset disabled>
+												<div class="form-group">
+													<label class="control-label col-md-offset-5"><h6>请假单</h6>
+													</label><br />
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">姓名</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="leave.userfile.name">
+														</div>
+														<label for="department" class="col-md-2 control-label">部门</label>
+														<div class="col-md-3">
+															<select class="form-control"
+																ng-model="leave.userfile.department">
+																<option>研发部</option>
+																<option>行政部</option>
+																<option>财政部</option>
+
+															</select>
+
+														</div>
+													</div>
+													<br />
+													<div class="row">
+														<label for="department" class="col-md-2 control-label">类型</label>
+														<div class="col-md-3">
+															<select class="form-control" ng-model="leave.type">
+																<option>年假</option>
+																<option>病假</option>
+																<option>事假</option>
+																<option>婚假</option>
+																<option>产假</option>
+															</select>
+
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">开始时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="leave.startTime">
+														</div>
+														<label for="department" class="col-md-2 control-label">结束时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="leave.startTime">
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="reason" class="col-md-2 control-label">事由</label>
+
+														<div class="col-md-8">
+															<textarea class="form-control" rows="5"
+																ng-model="leave.reason"></textarea>
+														</div>
+													</div>
+													<div class="row"></div>
+												</div>
+
+												<hr>
+
+												<div class="form-group"
+													ng-hide="leave.userfile.role=='部门经理'"
+													ng-hide="leave.userfile.role=='副总经理'"
+													ng-hide="leave.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>部门经理审批意见</h6>
+
+														</label> <label class="col-md-offset-2 control-label"><br />状态：{{leave.leaveApprovals[0].agree}}</label>
+
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled
+																ng-model="leave.leaveApprovals[0].comment"></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{leave.leaveApprovals[0].userfile.name}}</label>
+														<label class="col-md-offset-1 control-label">时间：{{leave.leaveApprovals[0].time}}</label>
+													</div>
+												</div>
+												<hr>
+
+												<div class="form-group" ng-hide="leave.state=='已拒绝'"
+													ng-hide="leave.userfile.role=='副总经理'"
+													ng-hide="leave.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>副总经理审批意见</h6>
+														</label> </label> <label class="col-md-offset-2 control-label"><br />状态：{{leave.leaveApprovals[1].agree}}</label>
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{leave.leaveApprovals[1].userfile.name}}</label>
+														<label class="col-md-offset-2 control-label">时间：{{leave.leaveApprovals[1].time}}</label>
+													</div>
+												</div>
+												<hr>
+
+												<div class="form-group" ng-hide="leave.state=='已拒绝'"
+													ng-hide="leave.time<24"
+													ng-hide="leave.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>总经理审批意见</h6>
+														</label> </label> <label class="col-md-offset-2 control-label"><br />状态：{{leave.leaveApprovals[2].agree}}</label>
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{leave.leaveApprovals[2].userfile.name}}</label>
+														<label class="col-md-offset-2 control-label">时间：{{leave.leaveApprovals[2].time}}</label>
+													</div>
+												</div>
+
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-offset-3" style="height: 40px"  ng-hide="true">
+							<div class="pagination">
+								<ul>
+									<li class="previous"><a href="#fakelink"
+										class="fui-arrow-left"></a></li>
+									<li class="active"><a href="#fakelink">1</a></li>
+									<li><a href="#fakelink">2</a></li>
+									<li><a href="#fakelink">3</a></li>
+									<li><a href="#fakelink">4</a></li>
+									<li><a href="#fakelink">5</a></li>
+									<li><a href="#fakelink">6</a></li>
+									<li><a href="#fakelink">7</a></li>
+									<li><a href="#fakelink">8</a></li>
+									<li class="next"><a href="#fakelink"
+										class="fui-arrow-right"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<script type="text/javascript">
+	$('.form_datetime').datetimepicker({
+		//language:  'fr',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 1
+	});
+</script>

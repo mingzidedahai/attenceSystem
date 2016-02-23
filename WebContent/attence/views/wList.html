@@ -1,0 +1,396 @@
+
+<div class="container" style="width: 1000px">
+	<div class="row">
+
+		<div class="col-md-11">
+			<div class="panel panel-primary">
+
+				<div class="panel-heading text-uppercase bg-danger">
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;进行中的外出申请</strong>
+				</div>
+				<div class="panel-body">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<div class="row">
+										<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;#</div>
+										<div class="col-md-2" style="color: #34495e">申请时间</div>
+										<div class="col-md-2" style="color: #34495e">开始时间</div>
+										<div class="col-md-2" style="color: #34495e">结束时间</div>
+									
+									</div>
+								</h4>
+							</div>
+
+						</div>
+						<div ng-repeat="evection in evections" ng-show="evection.state=='审批中'">
+
+							<!--  <a ng-href="#/view/{{recipe.id}}">{{recipe.title}}</a>-->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<div class="row">
+											<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;{{evection.userfile.name}}</div>
+											<div class="col-md-2" style="color: #34495e">{{evection.time}}</div>
+											<div class="col-md-2" style="color: #34495e">{{evection.startTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{evection.endTime}}</div>
+											
+
+											<small class="col-md-2" style="top: 4px"><a
+												data-toggle="collapse" data-parent="#accordion"
+												href="#{{evection.id}}" aria-expanded="true"
+												aria-controls="collapseThree">查看详情▼ </a> </small>
+										</div>
+									</h4>
+								</div>
+								<div id="{{evection.id}}" class="panel-collapse collapse"
+									role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<form class="form-horizontal" role="form">
+											<fieldset disabled>
+												<div class="form-group">
+													<label class="control-label col-md-offset-5"><h6>外出申请单</h6>
+													</label><small>&nbsp;&nbsp;&nbsp;&nbsp;<a ng-href="#/edit/{{evection.id}}">[修改]</a>&nbsp;&nbsp;<a>[删除]</a></small>
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">姓名</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="evection.userfile.name">
+														</div>
+														<label for="department" class="col-md-2 control-label">部门</label>
+														<div class="col-md-3">
+															<select class="form-control"
+																ng-model="evection.userfile.department">
+																<option>研发部</option>
+																<option>行政部</option>
+																<option>财政部</option>
+
+															</select>
+
+														</div>
+													</div>
+													<br />
+													
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">开始时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="evection.startTime">
+														</div>
+														<label for="department" class="col-md-2 control-label">结束时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="evection.endTime">
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="reason" class="col-md-2 control-label">事由</label>
+
+														<div class="col-md-8">
+															<textarea class="form-control" rows="5"
+																ng-model="evection.reason"></textarea>
+														</div>
+													</div>
+													<div class="row"></div>
+												</div>
+
+												<hr>
+
+												<div class="form-group" ng-hide="evection.userfile.role=='部门经理'" ng-hide="evection.userfile.role=='副总经理'" ng-hide="evection.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>部门经理审批意见</h6>
+
+														</label> <label class="col-md-offset-2 control-label"><br />状态：{{evection.evectionApprovals[0].agree}}</label>
+
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled
+																ng-model="evection.evectionApprovals[0].comment"></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{evection.evectionApprovals[0].userfile.name}}</label>
+														<label class="col-md-offset-1 control-label">时间：{{evection.evectionApprovals[0].time}}</label>
+													</div>
+												</div>
+												<hr>
+
+												<div class="form-group" ng-hide="evection.state=='已拒绝'" ng-hide="evection.userfile.role=='副总经理'" ng-hide="evection.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>副总经理审批意见</h6>
+														</label> </label> <label class="col-md-offset-2 control-label"><br />状态：{{evection.evectionApprovals[1].agree}}</label>
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled></textarea>
+														</div>
+													</div>
+													<div class="row" >
+														<label class="col-md-offset-7 control-label">姓名：{{evection.evectionApprovals[1].userfile.name}}</label> <label
+															class="col-md-offset-2 control-label">时间：{{evection.evectionApprovals[1].time}}</label>
+													</div>
+												</div>
+												<hr>
+                                               
+												<div class="form-group" ng-hide="evection.state=='已拒绝'"  ng-hide="evection.time<24" ng-hide="evection.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>总经理审批意见</h6>
+														</label> </label> <label class="col-md-offset-2 control-label"><br />状态：{{evection.evectionApprovals[2].agree}}</label>
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{evection.evectionApprovals[2].userfile.name}}</label> <label
+															class="col-md-offset-2 control-label">时间：{{evection.evectionApprovals[2].time}}</label>
+													</div>
+												</div>
+
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-offset-3" style="height: 40px" ng-hide="true">
+							<div class="pagination">
+								<ul>
+									<li class="previous"><a href="#fakelink"
+										class="fui-arrow-left"></a></li>
+									<li class="active"><a href="#fakelink">1</a></li>
+									<li><a href="#fakelink">2</a></li>
+									<li><a href="#fakelink">3</a></li>
+									<li><a href="#fakelink">4</a></li>
+									<li><a href="#fakelink">5</a></li>
+									<li><a href="#fakelink">6</a></li>
+									<li><a href="#fakelink">7</a></li>
+									<li><a href="#fakelink">8</a></li>
+									<li class="next"><a href="#fakelink"
+										class="fui-arrow-right"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading text-uppercase bg-danger">
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;外出历史</strong>
+				</div>
+
+				<div class="panel-body">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<div class="row">
+										<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;#</div>
+										<div class="col-md-2" style="color: #34495e">申请时间</div>
+
+										<div class="col-md-2" style="color: #34495e">开始时间</div>
+										<div class="col-md-2" style="color: #34495e">结束时间</div>
+									
+									</div>
+								</h4>
+							</div>
+
+						</div>
+						<div ng-repeat="evection in evections" ng-show="evection.state!='审批中'">
+
+							<!--  <a ng-href="#/view/{{recipe.id}}">{{recipe.title}}</a>-->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<div class="row">
+											<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;{{evection.userfile.name}}</div>
+											<div class="col-md-2" style="color: #34495e">{{evection.time}}</div>
+											<div class="col-md-2" style="color: #34495e">{{evection.startTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{evection.endTime}}</div>
+										
+
+											<small class="col-md-2" style="top: 4px"><a
+												data-toggle="collapse" data-parent="#accordion"
+												href="#Two{{evection.id}}" aria-expanded="true"
+												aria-controls="collapseThree">查看详情▼ </a> </small>
+										</div>
+									</h4>
+								</div>
+								<div id="Two{{evection.id}}" class="panel-collapse collapse"
+									role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<form class="form-horizontal" role="form">
+											<fieldset disabled>
+												<div class="form-group">
+													<label class="control-label col-md-offset-5"><h6>外出申请单</h6>
+													</label><br />
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">姓名</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="evection.userfile.name">
+														</div>
+														<label for="department" class="col-md-2 control-label">部门</label>
+														<div class="col-md-3">
+															<select class="form-control"
+																ng-model="evection.userfile.department">
+																<option>研发部</option>
+																<option>行政部</option>
+																<option>财政部</option>
+
+															</select>
+
+														</div>
+													</div>
+													<br />
+												
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="username" class="col-md-2 control-label">开始时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="evection.startTime">
+														</div>
+														<label for="department" class="col-md-2 control-label">结束时间</label>
+														<div class="col-md-3">
+															<input type="text" class="form-control" id="username"
+																placeholder="请输入姓名" ng-model="evection.endTime">
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label for="reason" class="col-md-2 control-label">事由</label>
+
+														<div class="col-md-8">
+															<textarea class="form-control" rows="5"
+																ng-model="evection.reason"></textarea>
+														</div>
+													</div>
+													<div class="row"></div>
+												</div>
+
+												<hr>
+
+												<div class="form-group" ng-hide="evection.userfile.role=='部门经理'" ng-hide="evection.userfile.role=='副总经理'" ng-hide="evection.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>部门经理审批意见</h6>
+
+														</label> <label class="col-md-offset-2 control-label"><br />状态：{{evection.evectionApprovals[0].agree}}</label>
+
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled
+																ng-model="evection.evectionApprovals[0].comment"></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{evection.evectionApprovals[0].userfile.name}}</label>
+														<label class="col-md-offset-1 control-label">时间：{{evection.evectionApprovals[0].time}}</label>
+													</div>
+												</div>
+												<hr>
+
+												<div class="form-group" ng-hide="evection.state=='已拒绝'" ng-hide="evection.userfile.role=='副总经理'" ng-hide="evection.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>副总经理审批意见</h6>
+														</label> </label> <label class="col-md-offset-2 control-label"><br />状态：{{evection.evectionApprovals[1].agree}}</label>
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{evection.evectionApprovals[1].userfile.name}}</label> <label
+															class="col-md-offset-2 control-label">时间：{{evection.evectionApprovals[1].time}}</label>
+													</div>
+												</div>
+												<hr>
+
+												<div class="form-group" ng-hide="evection.state=='已拒绝'" ng-hide="evection.time<24" ng-hide="evection.userfile.role=='总经理'">
+													<div class="row">
+														<label for="reason"
+															class="col-md-offset-3 col-md-4 control-label"><h6>总经理审批意见</h6>
+														</label> </label> <label class="col-md-offset-2 control-label"><br />状态：{{evection.evectionApprovals[2].agree}}</label>
+													</div>
+													<div class="row">
+														<div class="col-md-8 col-md-offset-2">
+															<textarea class="form-control" rows="3" disabled></textarea>
+														</div>
+													</div>
+													<div class="row">
+														<label class="col-md-offset-7 control-label">姓名：{{evection.evectionApprovals[2].userfile.name}}</label> <label
+															class="col-md-offset-2 control-label">时间：{{evection.evectionApprovals[2].time}}</label>
+													</div>
+												</div>
+
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-offset-3" style="height: 40px"  ng-hide="true">
+							<div class="pagination">
+								<ul>
+									<li class="previous"><a href="#fakelink"
+										class="fui-arrow-left"></a></li>
+									<li class="active"><a href="#fakelink">1</a></li>
+									<li><a href="#fakelink">2</a></li>
+									<li><a href="#fakelink">3</a></li>
+									<li><a href="#fakelink">4</a></li>
+									<li><a href="#fakelink">5</a></li>
+									<li><a href="#fakelink">6</a></li>
+									<li><a href="#fakelink">7</a></li>
+									<li><a href="#fakelink">8</a></li>
+									<li class="next"><a href="#fakelink"
+										class="fui-arrow-right"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<script>
+	$(function() {
+		$(".pinned").pin()
+	})
+</script>
+<script type="text/javascript">
+
+	$('.form_datetime').datetimepicker({
+		//language:  'fr',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 1
+	});
+</script>

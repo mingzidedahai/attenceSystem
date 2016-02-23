@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="guthub">
+<head>
+<title>GutHub - Create and Share</title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="../vendor/styles/bootstrap.css"
+	type="text/css" media="all">
+<link rel="stylesheet"
+	href="../vendor/styles/bootstrap-datetimepicker.css">
+<link href="../vendor/styles/my-flat-ui.css" rel="stylesheet">
+
+
+
+<script src="scripts/vendor/angular.min.js"></script>
+<script src="scripts/vendor/angular-resource.min.js"></script>
+<script src="scripts/directives/directives.js"></script>
+<script src="scripts/services/services.js"></script>
+<script src="scripts/controllers/controllers.js"></script>
+
+<script src="../vendor/scripts/metro/jquery.min.js"></script>
+<script src="../vendor/scripts/vendor/bootstrap.js"></script>
+<script src="../vendor/scripts/metro/jquery.widget.min.js"></script>
+<script src="../vendor/scripts/vendor/bootstrap-datetimepicker.js"></script>
+<script src="../vendor/scripts/vendor/flat-ui.js"></script>
+<script src="../vendor/scripts/vendor/jquery.pin.js"></script>
+<script src="../vendor/scripts/vendor/placeFoot.js"></script>
+
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+				<a href="#"><h3>ATTENCE &nbsp;&nbsp;SYSTEM</h3></a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-2">
+
+				<section class="left-nav" style="position: fixed">
+
+					<div class="row">
+
+						<ul class="nav pinned">
+						<li><a href="#/xLookCard">打卡记录</a>
+							</li>
+						<li><a href="#/xLookLeave">请假信息</a>
+							</li>
+						<li><a href="#/xLookForm">请假统计报表</a>
+							</li>
+						<li><a href="#/xYearVacation">设置可休年假</a>
+							</li>
+							
+						<li><a href="#/xImportCart">导入打卡数据</a>
+							</li>
+							
+							
+							
+						</ul>
+
+
+
+					</div>
+				</section>
+			</div>
+
+			<div class="col-md-10">
+
+				<div ng-view></div>
+
+			</div>
+		</div>
+	</div>
+	<footer id="footDiv">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-5">
+					<div class="footer-banner">
+						<h3 class="footer-title">ATTENCE</h3>
+						<ul>
+							<li>This is our attence system.</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+
+</body>
+</html>

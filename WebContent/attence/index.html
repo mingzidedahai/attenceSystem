@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="guthub">
+<head>
+<title>Attence System</title>
+<meta charset="utf-8">
+
+
+
+
+
+<script src="scripts/vendor/angular.min.js"></script>
+<script src="scripts/vendor/angular-resource.min.js"></script>
+<script src="scripts/directives/directives.js"></script>
+<script src="scripts/services/services.js"></script>
+<script src="scripts/controllers/controllers.js"></script>
+
+
+<script type="text/javascript"
+	src="../vendor/scripts/vendor/jquery-1.8.3.min.js"></script>
+<script src="../vendor/scripts/vendor/bootstrap.js"></script>
+<script src="../vendor/scripts/vendor/flat-ui.js"></script>
+<script src="../vendor/scripts/vendor/bootstrap-datetimepicker.js"></script>
+<script src="../vendor/scripts/vendor/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../vendor/scripts/vendor/my-cookie.js"></script>
+
+<link rel="stylesheet" href="../vendor/styles/bootstrap.css"
+	type="text/css" media="all">
+<link href="../vendor/styles/my-flat-ui.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="../vendor/styles/bootstrap-datetimepicker.css">
+
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<a href="#"><h3>ATTENCE &nbsp;&nbsp;SYSTEM</h3> </a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-2">
+
+				<section class="left-nav" style="position: fixed">
+
+					<div class="row">
+						<ul class="nav pinned"
+							style="padding-right: 30px; padding-left: 30px">
+							<li><a href="#/newLeave" style="padding: 4px">请假</a></li>
+							<li id="AUTH_LEAVINGAPPROVAL"><a href="#/me/leaveapprovals"
+								style="padding: 4px">请假审批</a></li>
+							<li><a href="#/me/leaves" style="padding: 4px">请假历史</a></li>
+							<li><a href="#/newEvection" style="padding: 4px">外出申请</a></li>
+							<li id="AUTH_EVECTIONAPPROVAL"><a
+								href="#/me/evectionapprovals" style="padding: 4px">外出审批</a></li>
+							<li><a href="#/me/evections" style="padding: 4px">外出历史</a></li>
+							<li><a href="#/me/punchs" style="padding: 4px">打卡记录</a></li>
+							<li><a href="#/allList" style="padding: 4px">所有请假外出</a></li>
+							<li><a href=""></a></li>
+						
+						<li id="AUTH_ALLPUNCH"><a href="#/punchs"
+								style="padding: 4px">所有打卡记录</a></li>
+							<li id="AUTH_LEAVINGTABLE"><a href="#/xLookForm"
+								style="padding: 4px">请假统计报表</a></li>
+							<li id="AUTH_SETVOCATION"><a href="#/xYearVacation"
+								style="padding: 4px">设置可休年假</a></li>
+								
+							<li id="AUTH_IMPORTPUNCHDATA"><a href="#/xImportCart"
+								style="padding: 4px">导入打卡数据</a></li>
+						</ul>
+					</div>
+				</section>
+			</div>
+
+			<div class="col-md-10">
+				<div ng-view></div>
+			</div>
+		</div>
+	</div>
+	<footer id="footDiv">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-5">
+					<div class="footer-banner">
+						<h3 class="footer-title">ATTENCE</h3>
+						<ul>
+							<li>This is our attence system.</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script>
+		if (getCookie('AUTH_LEAVINGTABLE') == 'false') {
+			document.getElementById('AUTH_LEAVINGTABLE').style.display = "none";
+		}
+		
+		if (getCookie('AUTH_SETVOCATION') == 'false') {
+			document.getElementById('AUTH_SETVOCATION').style.display = "none";
+		}
+		if (getCookie('AUTH_IMPORTPUNCHDATA') == 'false') {
+			document.getElementById('AUTH_IMPORTPUNCHDATA').style.display = "none";
+		}
+		if (getCookie('AUTH_LEAVINGAPPROVAL') == 'false') {
+			document.getElementById('AUTH_LEAVINGAPPROVAL').style.display = "none";
+		}
+		if (getCookie('AUTH_EVECTIONAPPROVAL') == 'false') {
+			document.getElementById('AUTH_EVECTIONAPPROVAL').style.display = "none";
+		}
+		if (getCookie('AUTH_SETVOCATION') == 'false') {
+			document.getElementById('AUTH_SETVOCATION').style.display = "none";
+		}
+		if (getCookie('AUTH_ALLPUNCH') == 'false') {
+			document.getElementById('AUTH_ALLPUNCH').style.display = "none";
+		}
+	</script>
+</body>
+</html>

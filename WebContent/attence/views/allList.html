@@ -1,0 +1,166 @@
+
+<div class="container" style="width: 1000px">
+	<div class="row">
+
+		<div class="col-md-11">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-uppercase bg-danger">
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;所有请假历史</strong>
+				</div>
+
+				<div class="panel-body">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<div class="row">
+										<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;#</div>
+										<div class="col-md-2" style="color: #34495e">申请时间</div>
+
+										<div class="col-md-2" style="color: #34495e">开始时间</div>
+										<div class="col-md-2" style="color: #34495e">结束时间</div>
+										<div class="col-md-2" style="color: #34495e">类型</div>
+										<div class="col-md-2" style="color: #34495e">状态</div>
+									</div>
+								</h4>
+							</div>
+
+						</div>
+						<div ng-repeat="leave in leaves">
+
+							<!--  <a ng-href="#/view/{{recipe.id}}">{{recipe.title}}</a>-->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<div class="row">
+											<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;{{leave.userfile.name}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.time}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.startTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.endTime}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.type}}</div>
+											<div class="col-md-2" style="color: #34495e">{{leave.state}}</div>
+
+
+										</div>
+									</h4>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-offset-3" style="height: 40px"  ng-hide="true">
+							<div class="pagination">
+								<ul>
+									<li class="previous"><a href="#fakelink"
+										class="fui-arrow-left"></a>
+									</li>
+									<li class="active"><a href="#fakelink">1</a>
+									</li>
+									<li><a href="#fakelink">2</a>
+									</li>
+									<li><a href="#fakelink">3</a>
+									</li>
+									<li><a href="#fakelink">4</a>
+									</li>
+									<li><a href="#fakelink">5</a>
+									</li>
+									<li><a href="#fakelink">6</a>
+									</li>
+									<li><a href="#fakelink">7</a>
+									</li>
+									<li><a href="#fakelink">8</a>
+									</li>
+									<li class="next"><a href="#fakelink"
+										class="fui-arrow-right"></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="panel panel-primary">
+					<div class="panel-heading text-uppercase bg-danger">
+						<strong>&nbsp;&nbsp;&nbsp;&nbsp;外出历史</strong>
+					</div>
+
+					<div class="panel-body">
+						<div class="panel-group">
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<div class="row">
+											<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;#</div>
+											<div class="col-md-2" style="color: #34495e">申请时间</div>
+
+											<div class="col-md-2" style="color: #34495e">开始时间</div>
+											<div class="col-md-2" style="color: #34495e">结束时间</div>
+											<div class="col-md-2" style="color: #34495e">状态</div>
+
+										</div>
+									</h4>
+								</div>
+
+							</div>
+							<div ng-repeat="evection in evections">
+
+								<!--  <a ng-href="#/view/{{recipe.id}}">{{recipe.title}}</a>-->
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingOne">
+										<h4 class="panel-title">
+											<div class="row">
+												<div class="col-md-2" style="color: #34495e">&nbsp;&nbsp;&nbsp;&nbsp;{{evection.userfile.name}}</div>
+												<div class="col-md-2" style="color: #34495e">{{evection.time}}</div>
+												<div class="col-md-2" style="color: #34495e">{{evection.startTime}}</div>
+												<div class="col-md-2" style="color: #34495e">{{evection.endTime}}</div>
+												<div class="col-md-2" style="color: #34495e">{{evection.state}}</div>
+
+
+
+											</div>
+										</h4>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="col-md-offset-3" style="height: 40px" ng-hide="true">
+								<div class="pagination">
+									<ul>
+										<li class="previous"><a href="#fakelink"
+											class="fui-arrow-left"></a>
+										</li>
+										<li class="active"><a href="#fakelink">1</a>
+										</li>
+										<li><a href="#fakelink">2</a>
+										</li>
+										<li><a href="#fakelink">3</a>
+										</li>
+										<li><a href="#fakelink">4</a>
+										</li>
+										<li><a href="#fakelink">5</a>
+										</li>
+										<li><a href="#fakelink">6</a>
+										</li>
+										<li><a href="#fakelink">7</a>
+										</li>
+										<li><a href="#fakelink">8</a>
+										</li>
+										<li class="next"><a href="#fakelink"
+											class="fui-arrow-right"></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+
+
+</div>
+

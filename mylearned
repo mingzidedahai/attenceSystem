@@ -1,0 +1,2 @@
+1、框架中mutiple bags 问题，可以将List容器改为Set容器
+2、cookie 前台的get和set见项目，cookie中不能放中文
